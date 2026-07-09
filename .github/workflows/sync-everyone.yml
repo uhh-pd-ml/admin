@@ -1,6 +1,6 @@
 name: Sync everyone team
 
-on:
+"on":
   workflow_dispatch:
   schedule:
     - cron: "17 3 * * *"
