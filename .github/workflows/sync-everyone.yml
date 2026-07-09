@@ -22,7 +22,7 @@ jobs:
 
       - name: Sync everyone team
         env:
-          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+          GITHUB_TOKEN_FOR_ORG_ADMIN: ${{ steps.app-token.outputs.token }}
           GITHUB_ORG: uhh-pd-ml
           GITHUB_TEAM_SLUG: everyone
         run: |
