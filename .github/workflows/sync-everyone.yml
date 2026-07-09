@@ -1,0 +1,29 @@
+name: Sync everyone team
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 3 * * *"
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          owner: uhh-pd-ml
+
+      - name: Sync everyone team
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+          GITHUB_ORG: uhh-pd-ml
+          GITHUB_TEAM_SLUG: everyone
+        run: |
+          python scripts/sync_everyone.py
